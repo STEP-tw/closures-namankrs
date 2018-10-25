@@ -5,7 +5,14 @@ const makeConstant = function(argument){
   }
 }
            //----------------------------------//
-const makeCounterFromN = undefined;
+const makeCounterFromN = function(number){
+  let count = number-1;
+  return function(){
+    count+=1;
+    return count;
+  }
+}
+           //-----------------------------------//
 const makeCounterFromZero = function(number){
   let count = -1;
   return function(){
