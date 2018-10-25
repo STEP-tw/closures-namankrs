@@ -21,8 +21,34 @@ const makeCounterFromZero = function(number){
   }
 }
         //----------------------------------//
-const makeDeltaTracker = undefined;
-const makeFiboGenerator = undefined;
+const makeDeltaTracker = function(number){
+  const deltaDetails = {"old" : number, delta : 0, new : number};
+  return function(newNumber){
+    if(newNumber == undefined) newNumber = 0;
+    deltaDetails.old = deltaDetails.new;
+    deltaDetails.delta = newNumber;
+    deltaDetails.new = deltaDetails.old + deltaDetails.delta;
+    return deltaDetails;
+  }
+}
+const makeFiboGenerator = function(firstTerm,secondTerm){
+  if(firstTerm == undefined && secondTerm == undefined){
+    firstTerm = 0;
+    secondTerm = 2;
+  }
+  if (secondTerm == undefined){
+    secondTerm = firstTerm+1;
+    firstTerm = 0;
+  }
+  secondTerm--;
+  firstTerm -= secondTerm;
+  return function(){
+    let nextTerm = firstTerm + secondTerm;
+    firstTerm = secondTerm;
+    secondTerm = nextTerm;
+    return nextTerm;
+  }
+}
 const makeCycler = undefined;
 const curry = undefined;
 const compose = undefined;
