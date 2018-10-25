@@ -57,8 +57,16 @@ const makeCycler = function(numbers){
     return result;
   }
 }
-const curry = undefined;
-const compose = undefined;
+const curry = function(funcRef,firstArgument){
+  return function(secondArgument,thirdArgument){
+    return funcRef(firstArgument,secondArgument,thirdArgument)
+  }
+}
+const compose = function(funcRef1,funcRef2){
+  return function(data1,data2){
+    return funcRef1(funcRef2(data1,data2));
+  }
+}
 
 exports.makeConstant=makeConstant;
 exports.makeCounterFromZero=makeCounterFromZero;
