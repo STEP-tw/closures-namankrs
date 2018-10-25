@@ -49,7 +49,14 @@ const makeFiboGenerator = function(firstTerm,secondTerm){
     return nextTerm;
   }
 }
-const makeCycler = undefined;
+const makeCycler = function(numbers){
+  list = numbers.slice(0,numbers.length);
+  return function(){
+    result = list[0];
+    list.push(list.shift());
+    return result;
+  }
+}
 const curry = undefined;
 const compose = undefined;
 
