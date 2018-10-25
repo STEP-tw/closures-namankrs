@@ -22,13 +22,16 @@ const makeCounterFromZero = function(number){
 }
         //----------------------------------//
 const makeDeltaTracker = function(number){
-  const deltaDetails = {"old" : number, delta : 0, new : number};
+  let old = number; 
+  let delta = 0; 
+  let latest = number;
   return function(newNumber){
-    if(newNumber == undefined) newNumber = 0;
-    deltaDetails.old = deltaDetails.new;
-    deltaDetails.delta = newNumber;
-    deltaDetails.new = deltaDetails.old + deltaDetails.delta;
-    return deltaDetails;
+    if(newNumber == undefined) 
+      newNumber = 0;
+    old = latest;
+    delta = newNumber;
+    latest = old + delta;
+    return {old : old, delta : delta, new : latest};
   }
 }
 const makeFiboGenerator = function(firstTerm,secondTerm){
