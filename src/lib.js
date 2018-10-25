@@ -4,8 +4,16 @@ const makeConstant = function(argument){
     return result;
   }
 }
+           //----------------------------------//
 const makeCounterFromN = undefined;
-const makeCounterFromZero = undefined;
+const makeCounterFromZero = function(number){
+  let count = -1;
+  return function(){
+    count+=1;
+    return count;
+  }
+}
+        //----------------------------------//
 const makeDeltaTracker = undefined;
 const makeFiboGenerator = undefined;
 const makeCycler = undefined;
