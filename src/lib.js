@@ -1,24 +1,17 @@
-const makeConstant = function(argument){
-  const result = argument;
-  return function(element){
-    return result;
+const makeConstant = function(element){
+  return function(){
+    return element;
   }
 }
            //----------------------------------//
 const makeCounterFromN = function(number){
-  let count = number-1;
   return function(){
-    count+=1;
-    return count;
+    return number++;
   }
 }
            //-----------------------------------//
 const makeCounterFromZero = function(number){
-  let count = -1;
-  return function(){
-    count+=1;
-    return count;
-  }
+  return makeCounterFromN(0);
 }
         //----------------------------------//
 const makeDeltaTracker = function(number){
@@ -34,24 +27,20 @@ const makeDeltaTracker = function(number){
     return {old : old, delta : delta, new : latest};
   }
 }
-const makeFiboGenerator = function(firstTerm,secondTerm){
-  if(firstTerm == undefined && secondTerm == undefined){
-    firstTerm = 0;
-    secondTerm = 2;
-  }
-  if (secondTerm == undefined){
-    secondTerm = firstTerm+1;
-    firstTerm = 0;
-  }
-  secondTerm--;
-  firstTerm -= secondTerm;
-  return function(){
-    let nextTerm = firstTerm + secondTerm;
-    firstTerm = secondTerm;
-    secondTerm = nextTerm;
-    return nextTerm;
-  }
+            //------------------------------//
+const makeFiboGenerator = function(second = 1, first = 0 ) {
+ let previous = Math.min(first,second);
+ let present = Math.max(first,second);
+ return function(){
+   let result = previous;
+   let next = previous + present;
+   previous = present;
+   present = next;
+   return result;
+ }
 }
+            //------------------------------//
+
 const makeCycler = function(numbers){
   list = numbers.slice(0,numbers.length);
   return function(){
@@ -60,16 +49,21 @@ const makeCycler = function(numbers){
     return result;
   }
 }
+            //------------------------------//
+
 const curry = function(funcRef,firstArgument){
   return function(secondArgument,thirdArgument){
     return funcRef(firstArgument,secondArgument,thirdArgument)
   }
 }
+            //------------------------------//
+
 const compose = function(funcRef1,funcRef2){
   return function(data1,data2){
     return funcRef1(funcRef2(data1,data2));
   }
 }
+            //------------------------------//
 
 exports.makeConstant=makeConstant;
 exports.makeCounterFromZero=makeCounterFromZero;
